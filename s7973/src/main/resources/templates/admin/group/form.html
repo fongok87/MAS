@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Groups</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Dodaj grupę</h2>
+    <form class="form" th:object="${groups}" th:action="@{/admin/group/add}" th:method="post">
+        <label>Kod:</label>
+        <input type="text" th:field="*{code}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('code')}" th:errors="*{code}"/>
+                </span>
+        <label>Rok:</label>
+        <input type="text"  th:field="*{year}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('year')}" th:errors="*{year}"/>
+                </span>
+        <div class="section-buttons">
+            <a href="/admin/group/add" class="form-button-submit" type="submit"><button class="form-button-submit" type="submit">Zapisz</button></a>
+        </div>
+        <div class="form-buttons">
+            <a class="form-button-cancel" href="/admin/group/list">Powrót</a>
+        </div>
+    </form>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Subjects</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" class="active">Przedmioty</a></li>
+        <li><a href="/admin" >Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Lista przedmiotów</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Alias</th>
+            <th>Semestr</th>
+        </tr>
+        </thead>
+        <tbody th:each="subject:${subjects}">
+        <tr>
+            <td th:text="${subject.getName()}"></td>
+            <td th:text="${subject.getAlias()}"></td>
+            <td th:text="${subject.getSemester()}"></td>
+
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

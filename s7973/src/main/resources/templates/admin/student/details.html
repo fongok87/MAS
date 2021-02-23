@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Szczegóły studenta</h2>
+    <form class="form" th:object="${students}">
+            <label>Imię:</label>
+                <input type="text"  th:field="*{name}" disabled/>
+                    <span>
+                    </span>
+            <label>Nazwisko:</label>
+                <input type="text"  th:field="*{surname}" disabled/>
+                    <span>
+                    </span>
+            <label>E-mail:</label>
+                <input type="text"  th:field="*{email}" disabled/>
+                    <span>
+                    </span>
+            <label>Telefon:</label>
+                <input type="text"  th:field="*{telephone}" disabled/>
+                    <span>
+                    </span>
+            <label>Alias:</label>
+                <input type="text"  th:field="*{alias}" disabled/>
+                    <span>
+                    </span>
+            <div class="section-buttons">
+                <a th:href="@{'/admin/student/edit/' + ${id}}"class="list-actions-button-edit">Edytuj</a>
+            </div>
+        <div class="form-buttons">
+            <a th:href="@{'/admin/student/addGrade/' + ${id}}" class="button-add">Wystaw ocenę</a>
+        </div>
+            <div class="form-buttons">
+                <a th:href="@{'/admin/student/payment/details/' + ${id}}"class="list-actions-button-details">Płatności</a>
+                <p id="errorsSummary" class="errors-text"></p>
+                <a class="form-button-cancel" href="/admin/student/list">Powrót</a>
+        </div>
+    </form>
+    <h2>Historia ocen</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Przedmiot</th>
+            <th>Kod</th>
+            <th>Ocena</th>
+            <th>Data</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody th:each="grade:${grades}">
+        <tr>
+        <td th:text="${grade.getSubject().getName()}"></td>
+        <td th:text="${grade.getSubject().getAlias()}"></td>
+        <td th:text="${grade.getGrade()}"></td>
+        <td th:text="${grade.getDate()}"></td>
+            <td>
+                <ul class="list-actions">
+                    <li><a th:href="@{'/admin/student/grade/delete/' + ${grade.getId()}}" class="list-actions-button-delete">Usuń</a></li>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+    <h2>Przypisana grupa</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Kod grupy</th>
+            <th>Rok grupy</th>
+            <th>Specjalizacja</th>
+            <th>Tryb</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody th:each="group:${groups}">
+        <tr>
+            <td th:text="${group.getCode()}"></td>
+            <td th:text="${group.getYear()}"></td>
+            <td th:text="${group.getSpecialization().getName()}"></td>
+            <td th:text="${group.getMode().getMode()}"></td>
+            <td>
+                <ul class="list-actions">
+                    <li><a th:href="@{'/admin/student/group/details/' + ${id}}" class="button-add">Szczegóły</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

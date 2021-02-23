@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" class="active">Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" >Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Lista studentów</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>E-mail</th>
+            <th>Telefon</th>
+            <th>Alias</th>
+        </tr>
+        </thead>
+        <tbody th:each="student:${students}">
+        <tr>
+            <td th:text="${student.getName()}"></td>
+            <td th:text="${student.getSurname()}"></td>
+            <td th:text="${student.getEmail()}"></td>
+            <td th:text="${student.getTelephone()}"></td>
+            <td th:text="${student.getAlias()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

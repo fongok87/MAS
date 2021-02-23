@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Wystaw ocenę</h2>
+    <form class="form"  th:action="@{'/admin/student/addGrade/' + ${id}}" th:method="post">
+        <label>Student:</label>
+        <label th:text = "${student.name} + ' ' + ${student.surname}"/>
+        <div style="display: none;">
+        <select  class="form-control" th:field="*{grade.student}" >
+            <option th:each="student : ${student}" th:value="${student.id}"></option>
+        </select>
+        </div>
+        <span>
+                    </span>
+        <label>Przedmiot:</label>
+        <select class="form-control" th:field="*{grade.subject}" >
+            <option th:each="subject : ${subject}" th:value="${subject.id}"
+                    th:text="${subject.name}"></option>
+        </select>
+        <span>
+                    </span>
+        <label>Ocena:</label>
+        <input type="text" th:field="${grade.grade}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('grade.grade')}" th:errors="*{grade}"/>
+                </span>
+        <label>Data:</label>
+        <input type="date" th:field="${grade.date}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('grade.date')}" th:errors="*{date}"/>
+                </span>
+        <div>
+            <p id="errorsSummary" class="errors-text"></p>
+            <a href="/admin/student/list" ><button class="form-button-submit" type="submit" >Wystaw ocenę</button></a>
+            <p><a th:href="@{'/admin/student/details/' + ${id}}" class="list-actions-button-delete" >Powrót</a></p>
+        </div>
+    </form>
+
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

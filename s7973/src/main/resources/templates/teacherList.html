@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Teachers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" class="active">Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" >Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Lista nauczycieli</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>E-mail</th>
+            <th>Telefon</th>
+        </tr>
+        </thead>
+        <tbody th:each="teacher:${teachers}">
+        <tr>
+            <td th:text="${teacher.getName()}"></td>
+            <td th:text="${teacher.getSurname()}"></td>
+            <td th:text="${teacher.getEmail()}"></td>
+            <td th:text="${teacher.getTelephone()}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <p></p>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

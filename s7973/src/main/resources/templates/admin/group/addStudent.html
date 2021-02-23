@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Groups</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Edycja grupy</h2>
+    <form class="form" th:object="${groups}" th:action="@{'/admin/group/addStudent/' + ${id}}" th:method="patch">
+        <label>Kod:</label>
+        <label th:text = "${groups.code}"/>
+        <div style="display: none;">
+            <input type="text"  th:field="*{code}" th:value="*{code}"  />
+        </div>
+        <span>
+                </span>
+        <label>Rok:</label>
+        <label th:text = "${groups.year}"/>
+        <div style="display: none;">
+            <input type="text"  th:field="*{year}" th:value ="*{year}" />
+        </div>
+        <span>
+                </span>
+        <label>Specjalizacja:</label>
+        <label th:text = "${groups.specialization.name}"/>
+        <input type="hidden"  th:field="*{specialization.id}" th:value ="*{specialization.id}" />
+        <span>
+                </span>
+        <label>Tryb nauczania:</label>
+        <label th:text = "${groups.mode.mode}"/>
+        <input type="hidden"  th:field="*{mode.id}" th:value ="*{mode.id}" />
+        <span>
+            </span>
+        <label class="control-label">Dodaj studentów:</label>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Alias</th>
+                <th>Imię</th>
+                <th>Nazwisko</th>
+            </tr>
+            </thead>
+            <tbody th:each="student:${students}">
+            <tr>
+                <td>
+                    <input type="checkbox" name="searchValues" th:field="*{students}" th:value="${student.id}"/>
+                </td>
+                <td th:text="${student.getAlias()}"></td>
+                <td th:text="${student.getName()}"></td>
+                <td th:text="${student.getSurname()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div style="visibility: hidden; display: none; ..">
+        <label class="control-label">Wybierz przedmioty:</label>
+        <table class="table-list">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Nazwa przedmiotu</th>
+                <th>Kod przedmiotu</th>
+            </tr>
+            </thead>
+            <tbody th:each="subject:${subjects}">
+            <tr>
+                <td>
+                    <input type="checkbox" name="searchValues" th:field="*{subjects}" th:value="${subject.id}"/>
+                </td>
+                <td th:text="${subject.getName()}"></td>
+                <td th:text="${subject.getAlias()}"></td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+        <div class="form-buttons" >
+            <p style="color: red ; " th:if="${#fields.hasAnyErrors()}" th:errors="*{all}"></p>
+            <a th:href="@{'/admin/group/addStudent/' + ${id}}" ><button class="form-button-submit"  type="submit" value="Edit">Zapisz</button></a>
+        </div>
+        <div class="form-buttons">
+            <a class="form-button-cancel" th:href="@{'/admin/group/list/'}" >Powrót</a>
+        </div>
+    </form>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

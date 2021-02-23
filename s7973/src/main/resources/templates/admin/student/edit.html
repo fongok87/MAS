@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Edycja studenta</h2>
+    <form class="form" th:object="${student}" th:action="@{'/admin/student/edit/' + ${id}}" th:method="patch">
+        <label>Imię:</label>
+            <input type="text"  th:field="*{name}" th:value="*{name}"/>
+                <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                </span>
+        <label>Nazwisko:</label>
+            <input type="text"  th:field="*{surname}" th:value="*{surname}"/>
+                <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"/>
+                </span>
+        <label>E-mail:</label>
+            <input type="text"  th:field="*{email}" th:value="*{email}"/>
+                <span>
+                </span>
+        <label>Telefon:</label>
+            <input type="text"  th:field="*{telephone}" th:value="*{telephone}"/>
+                <span>
+                </span>
+        <label>Alias:</label>
+            <input type="text"  th:field="*{alias}" th:value="*{alias}"/>
+                <span>
+                </span>
+        <div class="section-buttons">
+            <a th:href="@{'/admin/student/edit/' + ${id}}" ><button class="form-button-submit"  type="submit" value="Edit">Zapisz</button></a>
+        </div>
+        <div class="form-buttons">
+            <a class="form-button-cancel" th:href="@{'/admin/student/details/' + ${id}}">Powrót</a>
+        </div>
+    </form>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/">Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Lista akcji</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Specjalizacje</th>
+            <th>Tryby nauczania</th>
+            <th>Grupy</th>
+        </tr>
+        <tr>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/spec/list/'}"  class="list-actions-button-details">Przeglądaj</a></p>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/mode/list/'}" class="list-actions-button-details" >Przeglądaj</a></p>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/group/list/'}" class="list-actions-button-details" >Przeglądaj</a></p>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Przedmioty</th>
+            <th>Studenci</th>
+            <th>Nauczyciele</th>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/subject/list/'}"  class="list-actions-button-details">Przeglądaj</a></p>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/student/list'}" class="list-actions-button-details" >Przeglądaj</a></p>
+                </ul>
+            </td>
+            <td>
+                <ul class="list-actions">
+                    <p><a th:href="@{'/admin/teacher/list/'}" class="list-actions-button-details" >Przeglądaj</a></p>
+                </ul>
+            </td>
+        </tr>
+        </thead>
+    </table>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Szczegóły przedmiotu</h2>
+    <form class="form" th:object="${subjects}">
+        <label>Nazwa:</label>
+            <input type="text"  th:field="*{name}" disabled/>
+                <span>
+                </span>
+        <label>Alias:</label>
+            <input type="text"  th:field="*{alias}" disabled/>
+                <span>
+                </span>
+        <label>Semestr:</label>
+            <input type="text"  th:field="*{semester}" disabled/>
+                <span>
+                </span>
+        <label class="control-label">Nauczyciel:</label>
+        <select class="form-control" th:field="*{teacher.id}" disabled>
+            <option th:each="teacher : ${teachers}" th:value="${teacher.id}"
+                    th:text="${teacher.surname} + ' ' + ${teacher.name}"></option>
+        </select>
+        <span>
+            </span>
+        <div class="section-buttons">
+            <a th:href="@{'/admin/subject/edit/' + ${id}}"class="list-actions-button-edit">Edytuj</a>
+        </div>
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <a class="form-button-cancel" href="/admin/subject/list">Powrót</a>
+        </div>
+    </form>
+    <h2>Przypisane grupy</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Kod grupy</th>
+            <th>Rok grupy</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody th:each="groups:${groups}">
+        <tr>
+            <td th:text="${groups.getCode()}"></td>
+            <td th:text="${groups.getYear()}"></td>
+            <td>
+                <ul class="list-actions">
+                    <li><a th:href="@{'/admin/group/details/' + ${groups.getId()}}" class="list-actions-button-details">Szczegóły</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Historia ocen studentów</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Imię</th>
+            <th>Nazwisko</th>
+            <th>Ocena</th>
+            <th>Data</th>
+        </tr>
+        </thead>
+        <tbody th:each="grade:${grades}">
+        <tr>
+            <td th:text="${grade.getStudent().getName()}"></td>
+            <td th:text="${grade.getStudent().getSurname()}"></td>
+            <td th:text="${grade.getGrade()}"></td>
+            <td th:text="${grade.getDate()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Teachers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Szczegóły nauczyciela</h2>
+    <form class="form" th:object="${teachers}">
+        <label>Imię:</label>
+            <input type="text"  th:field="*{name}" disabled/>
+                <span>
+                </span>
+        <label>Nazwisko:</label>
+            <input type="text"  th:field="*{surname}" disabled/>
+                <span>
+                    </span>
+        <label>E-mail:</label>
+            <input type="text"  th:field="*{email}" disabled/>
+                <span>
+                </span>
+        <label>Telefon:</label>
+            <input type="text"  th:field="*{telephone}" disabled/>
+                <span>
+                </span>
+        <label>Zarobki:</label>
+            <input type="text"  th:field="*{salary}" disabled/>
+                <span>
+                </span>
+        <div class="section-buttons">
+            <a th:href="@{'/admin/teacher/edit/' + ${id}}"class="list-actions-button-edit">Edytuj</a>
+        </div>
+        <div class="form-buttons">
+            <p id="errorsSummary" class="errors-text"></p>
+            <a class="form-button-cancel" href="/admin/teacher/list">Powrót</a>
+        </div>
+    </form>
+    <h2>Przypisane przedmioty</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Kod</th>
+            <th>Nazwa</th>
+            <th>Akcje</th>
+        </tr>
+        </thead>
+        <tbody th:each="subject:${subjects}">
+        <tr>
+            <td th:text="${subject.getAlias()}"></td>
+            <td th:text="${subject.getName()}"></td>
+            <td>
+                <ul class="list-actions">
+                    <li><a th:href="@{'/admin/subject/details/' + ${subject.getId()}}" class="list-actions-button-details">Szczegóły</a></li>
+                </ul>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Zatrudnienie</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Data od</th>
+            <th>Data do</th>
+        </tr>
+        </thead>
+        <tbody th:each="employment:${employments}">
+        <tr>
+            <td th:text="${employment.getDateFrom()}"></td>
+            <td th:text="${employment.getDateTo()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>

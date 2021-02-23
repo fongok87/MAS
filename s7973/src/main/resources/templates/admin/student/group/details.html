@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Szczegóły grupy</h2>
+    <form class="form" th:object="${groups}">
+        <label>Kod grupy:</label>
+        <input type="text"  th:field="*{code}" disabled/>
+        <span>
+                    </span>
+        <label>Rok grupy:</label>
+        <input type="text"  th:field="*{year}" disabled/>
+        <span>
+                    </span>
+        <label>Specjalizacja:</label>
+        <input type="text"  th:field="*{specialization.name}" disabled/>
+        <span>
+                    </span>
+        <label>Kod specjalizacji:</label>
+        <input type="text"  th:field="*{specialization.code}" disabled/>
+        <span>
+                    </span>
+        <label>Tryb:</label>
+        <input type="text"  th:field="*{mode.mode}" disabled/>
+        <span>
+                    </span>
+
+        </div>
+    </form>
+    <h2>Przypisane przedmioty</h2>
+    <table class="table-list">
+        <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Alias</th>
+            <th>Semestr</th>
+            <th>Nauczyciel</th>
+        </tr>
+        </thead>
+        <tbody th:each="subject:${subjects}">
+        <tr>
+            <td th:text="${subject.getName()}"></td>
+            <td th:text="${subject.getAlias()}"></td>
+            <td th:text="${subject.getSemester()}"></td>
+            <td th:text="${subject.getTeacher().getSurname()} + ' ' + ${subject.getTeacher().getName()}"></td>
+        </tbody>
+    </table>
+    <p></p>
+    <form class = "form" >
+        <div>
+            <a class="form-button-cancel" th:href="@{'/admin/student/details/' + ${id}}">Powrót</a>
+        </div>
+    </form>
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+

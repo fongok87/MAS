@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<html>
+<head>
+    <title>Students</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<header>
+    <h1>Akademia IT</h1>
+    <img src="/images/academy_icon.jpg" alt="Akademia IT Logo">
+</header>
+<nav>
+    <ul>
+        <li><a href="/" >Strona główna</a></li>
+        <li><a href="/students" >Studenci</a></li>
+        <li><a href="/teachers" >Nauczyciele</a></li>
+        <li><a href="/subjects" >Przedmioty</a></li>
+        <li><a href="/admin" class="active">Administracja</a></li>
+    </ul>
+</nav>
+<main>
+    <h2>Dodaj zatrudnienie</h2>
+    <form class="form"  th:action="@{'/admin/teacher/employment/' + ${id}}" th:method="post">
+        <label>Nauczyciel:</label>
+        <label th:text = "${teacher.name} + ' ' + ${teacher.surname}"/>
+        <div style="display: none;">
+            <select  class="form-control" th:field="*{employment.teacher}" >
+                <option th:each="teacher : ${teacher}" th:value="${teacher.id}"></option>
+            </select>
+        </div>
+        <span>
+                    </span>
+        <label>Od kiedy:</label>
+        <input type="date" th:field="${employment.dateFrom}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('employment.dateFrom')}" th:errors="*{employment.dateFrom}"/>
+                </span>
+        <label>Do kiedy:</label>
+        <input type="date" th:field="${employment.dateTo}"/>
+        <span style="color: red; ">
+                    <p th:if="${#fields.hasErrors('employment.dateTo')}" th:errors="*{employment.dateTo}"/>
+                </span>
+        <div>
+            <p id="errorsSummary" class="errors-text"></p>
+            <a href="/admin/teacher/list" ><button class="form-button-submit" type="submit" >Dodaj</button></a>
+            <p><a th:href="@{'/admin/teacher/details/' + ${id}}" class="list-actions-button-delete" >Powrót</a></p>
+        </div>
+    </form>
+
+</main>
+<footer>
+    Rafał Smoczyński s7973
+</footer>
+</body>
+</html>
+
